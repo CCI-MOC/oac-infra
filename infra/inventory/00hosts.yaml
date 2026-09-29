@@ -32,11 +32,11 @@ all:
           vars:
             network_name: oac-dev-workload0
             cluster: oac-dev-workload0
-            boot_image_url: "http://10.2.0.82/boot/oac-dev-infra-agent.iso"
           children:
             oac_dev_workload0_gpu:
               vars:
                 bmc_type: lenovo
+                boot_image_url: "http://10.2.0.82/boot/oac-dev-infra-discovery.iso"
               hosts:
                 oac-dev-workload0-gpu-0:
                   node_name: MOC-R4PCC02U05
@@ -47,6 +47,7 @@ all:
             oac_dev_workload0_compute:
               vars:
                 bmc_type: idrac
+                boot_image_url: "http://10.2.0.82/boot/oac-dev-infra-discovery.iso"
               hosts:
                 oac-dev-workload0-compute-0:
                   node_name: MOC-R4PAC21U03-S3
@@ -57,6 +58,27 @@ all:
                 oac-dev-workload0-compute-2:
                   node_name: MOC-R4PAC22U29-S3
                   bmc_addr: 10.2.12.152
+        oac_dev_workload1:
+          vars:
+            cluster: oac-dev-workload1
+            bmc_type: idrac
+            bm_management: bmc
+          children:
+            oac_dev_workload1_compute:
+              vars:
+                boot_image_url: "http://10.2.0.82/boot/dev-workload-agent.iso"
+                #boot_image_url: "http://10.2.0.82/boot/discovery-r440.iso"
+              hosts:
+                oac-dev-workload1-compute-0:
+                  node_name: MOC-R4PAC10U33-S1C
+                  bmc_addr: 10.2.13.173
+                  mac_addr: a8:99:69:8a:97:a9
+                  resource_class: fc430
+                oac-dev-workload1-compute-1:
+                  node_name: MOC-R4PAC10U33-S3B
+                  bmc_addr: 10.2.13.176
+                  mac_addr: a8:99:69:8a:99:9d
+                  resource_class: fc430
         oac_prod_infra:
           vars:
             cluster: oac-prod-infra
@@ -76,19 +98,19 @@ all:
                 oac-prod-infra-control-2:
                   node_name: MOC-R4PAC10U37-S3C
                   bmc_addr: 10.2.13.197
-            #   oac_prod_infra_compute:
-            #     vars:
-            #       boot_image_url: "http://10.2.0.82/boot/discovery-r440.iso"
-            #     hosts:
-            #       oac-prod-infra-compute-0:
-            #         node_name: R440-TEMP-NAME-1
-            #         bmc_addr: 10.3.10.114
-            #       oac-prod-infra-compute-1:
-            #         node_name: R440-TEMP-NAME-2
-            #         bmc_addr: 10.3.10.115
-            #       oac-prod-infra-compute-2:
-            #         node_name: R440-TEMP-NAME-3
-            #         bmc_addr: 10.3.10.116
+#            oac_prod_infra_compute:
+#              vars:
+#                boot_image_url: "http://10.2.0.82/boot/discovery-r440.iso"
+#              hosts:
+#                oac-prod-infra-compute-0:
+#                  node_name: R440-TEMP-NAME-1
+#                  bmc_addr: 10.3.10.114
+#                oac-prod-infra-compute-1:
+#                  node_name: R440-TEMP-NAME-2
+#                  bmc_addr: 10.3.10.115
+#                oac-prod-infra-compute-2:
+#                  node_name: R440-TEMP-NAME-3
+#                  bmc_addr: 10.3.10.116
             # fc830s temporarily used as computes while r440s issues are worked out
             oac_prod_infra_compute_temp:
               vars:
@@ -107,10 +129,10 @@ all:
           vars:
             cluster: oac-prod-workload0
             bmc_type: idrac
-            boot_image_url: "http://10.2.0.82/boot/prod-workload0-agent-discovery.iso"
           children:
             oac_prod_workload0_compute:
               vars:
+                boot_image_url: "http://10.2.0.82/boot/prod-workload0-agent-discovery.iso"
                 bm_management: bmc
               hosts:
                 oac-prod-workload0-compute-0:
@@ -130,6 +152,8 @@ all:
                   resource_class: fc830
             oac_prod_workload0_gpu:
               vars:
+                boot_image_url: "http://10.2.0.82/boot/prod-workload0-agent-discovery.iso"
+                #boot_image_url: "http://10.2.0.82/boot/discovery-r440.iso"
                 bm_management: openstack
                 bmc_type: lenovo
               hosts:
@@ -142,6 +166,12 @@ all:
                 oac-prod-workload0-gpu-2:
                   node_name: MOC-R4PCC04U11
                   bmc_addr: 10.2.20.111
+                oac-prod-workload0-gpu-3:
+                  node_name: MOC-R4PCC04U12
+                  bmc_addr: 10.2.20.112
+                oac-prod-workload0-gpu-4:
+                  node_name: MOC-R4PCC04U16
+                  bmc_addr: 10.2.20.116
             oac_prod_workload0_gpu_sxm:
               vars:
                 boot_image_url: "http://10.2.0.82/boot/prod-workload0-agent-discovery.iso"
