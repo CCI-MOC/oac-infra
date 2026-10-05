@@ -44,6 +44,14 @@ all:
                 oac-dev-workload0-gpu-1:
                   node_name: MOC-R4PCC02U09
                   bmc_addr: 10.2.19.109
+            oac_dev_workload0_gpu_a100:
+              vars:
+                bmc_type: lenovo
+                boot_image_url: "http://10.2.0.82/boot/oac-dev-infra-agent.iso"
+              hosts:
+                oac-dev-workload0-gpu-a100-0:
+                  node_name: MOC-R8PAC23U33
+                  bmc_addr: 10.2.18.133
             oac_dev_workload0_compute:
               vars:
                 bmc_type: idrac
@@ -188,18 +196,29 @@ all:
       children:
         jetty:
           vars:
-            network_name: jetty
+            network_name: jetty-net
             bmc_type: idrac
-            # boot_image_url: "http://10.2.0.82/boot/agent.x86_64.iso"
-            boot_image_url: "http://10.2.0.82/boot/discovery.iso"
+            boot_image_url: "http://10.2.0.82/boot/jetty-discovery.iso"
             cluster: jetty
-          hosts:
-            jetty-0:
-              node_name: MOC-R4PAC08U35-S3D
-              bmc_addr: 10.2.14.188
-            jetty-1:
-              node_name: MOC-R4PAC08U31-S1A
-              bmc_addr: 10.2.14.161
-            jetty-2:
-              node_name: MOC-R4PAC08U31-S1B
-              bmc_addr: 10.2.14.162
+          children:
+            jetty_controller:
+              hosts:
+                jetty-0:
+                  node_name: MOC-R4PAC08U35-S3D
+                  bmc_addr: 10.2.14.188
+                jetty-1:
+                  node_name: MOC-R4PAC08U31-S1A
+                  bmc_addr: 10.2.14.161
+                jetty-2:
+                  node_name: MOC-R4PAC08U31-S1B
+                  bmc_addr: 10.2.14.162
+            jetty_gpu:
+              vars:
+                bmc_type: lenovo
+              hosts:
+                jetty-gpu-0:
+                  node_name: MOC-R4PCC02U15
+                  bmc_addr: 10.2.19.115
+                jetty-gpu-1:
+                  node_name: MOC-R4PCC02U16
+                  bmc_addr: 10.2.19.116
