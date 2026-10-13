@@ -1,0 +1,50 @@
+---
+cluster_domain_name: my-cluster
+base_domain: example.massopen.cloud
+
+master1_hostname: "master-1"
+master1_ip: "10.0.0.11"
+master1_mac: "aa:bb:cc:dd:ee:01"
+master1_install_drive_serial: "SERIAL1"
+master1_etcd_drive_wwn: "0x5000000000000001"
+
+master2_hostname: "master-2"
+master2_ip: "10.0.0.12"
+master2_mac: "aa:bb:cc:dd:ee:02"
+master2_install_drive_serial: "SERIAL2"
+master2_etcd_drive_wwn: "0x5000000000000002"
+
+master3_hostname: "master-3"
+master3_ip: "10.0.0.13"
+master3_mac: "aa:bb:cc:dd:ee:03"
+master3_install_drive_serial: "SERIAL3"
+master3_etcd_drive_wwn: "0x5000000000000003"
+
+# Optional — omit for a compact (masters-only) cluster.
+# workers:
+#   - hostname: "worker-1"
+#     ip: "10.0.0.21"
+#     mac: "aa:bb:cc:dd:ee:11"
+#     install_drive_serial: "SERIAL4"
+#   - hostname: "worker-2"
+#     ip: "10.0.0.22"
+#     mac: "aa:bb:cc:dd:ee:12"
+#     install_drive_serial: "SERIAL5"
+
+machine_network: 10.0.0.0/24
+rendezvous_ip: 10.0.0.11
+gateway_ip: 10.0.0.1
+dns_ip: 8.8.8.8
+cluster_network: 10.128.0.0/14
+svc_network: 172.30.0.0/16
+ntp: us.pool.ntp.org
+
+api_ip: 10.0.1.10
+ingress_ip: 10.0.1.11
+
+fips_enabled: false
+diskencryption_mode: ""
+
+# Place your SSH public key in credentials/<cluster-name>/.
+ssh_public_key: >-
+  {{ lookup("ansible.builtin.file", [playbook_dir, "credentials", "<cluster-name>", "<cluster-name>-key.pub"]|join("/")) }}
