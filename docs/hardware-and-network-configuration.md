@@ -91,11 +91,11 @@ The nodes in rack R4PAC10 have been removed from ESI and dedicated to this proje
 | MOC-R4PAC10U21-S1  | fc830          | 10.2.13.111  |                       | * IPMI Unreachable        |
 | MOC-R4PAC10U21-S3  | fc830          | 10.2.13.112  |                       | * IPMI Unreachable        |
 | MOC-R4PAC10U19-S1  | fc830          | 10.2.13.101  | NIC1: 213, NIC2: 2311 | Prod Infra Compute (Temp) |
-| MOC-R4PAC10U19-S3  | fc830          | 10.2.13.102  |                       |                           |
-| MOC-R4PAC10U17-S3  | fc830          | 10.2.13.92   |                       |                           |
-| MOC-R4PAC10U15-S1  | fc830          | 10.2.13.81   |                       |                           |
+| MOC-R4PAC10U19-S3  | fc830          | 10.2.13.102  |                       | * Won't power on          |
+| MOC-R4PAC10U17-S3  | fc830          | 10.2.13.92   |                       | Nist Dev Infra            |
+| MOC-R4PAC10U15-S1  | fc830          | 10.2.13.81   |                       | Nist Dev Infra            |
 | MOC-R4PAC10U15-S3  | fc830          | 10.2.13.82   |                       |                           |
-| MOC-R4PAC10U13-S1  | fc830          | 10.2.13.71   |                       |                           |
+| MOC-R4PAC10U13-S1  | fc830          | 10.2.13.71   |                       | Nist Dev Infra            |
 | MOC-R4PAC10U13-S3  | fc830          | 10.2.13.72   |                       | * Boot Issue              |
 | MOC-R4PAC10U11-S1  | fc830          | 10.2.13.61   |                       | * Boot Issue              |
 | MOC-R4PAC10U11-S3  | fc830          | 10.2.13.62   | NIC1: 213, NIC2: 2311 | Prod Infra Compute (Temp) |

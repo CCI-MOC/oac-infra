@@ -1,0 +1,49 @@
+---
+cluster_domain_name: nist-dev-infra
+base_domain: nist.int.massopen.cloud
+
+# install_drive_serial/etcd_drive_wwn confirmed via
+# `lsblk -o NAME,SIZE,SERIAL,WWN` against the live master nodes. etcd_drive_wwn
+# is matched by hostname in 98-master-var-lib-etcd.j2, resolved via
+# /dev/disk/by-id/wwn-<value>. etcd_drive_wwn MUST be quoted -- YAML parses an
+# unquoted 0x... value as a hex integer, and Jinja renders it back in decimal.
+
+# host info for MOC-R4PAC10U13-S1
+master1_hostname: "moc-r4pac10u13-s1"
+master1_ip: "10.20.18.22"
+master1_mac: "7c:fe:90:cb:74:5a"
+master1_install_drive_serial: "S40ENX0M505330"
+master1_etcd_drive_wwn: "0x5002538b495c4020"
+
+# host info for MOC-R4PAC10U15-S1
+master2_hostname: "moc-r4pac10u15-s1"
+master2_ip: "10.20.18.21"
+master2_mac: "24:8a:07:1e:2c:76"
+master2_install_drive_serial: "S40ENX0M806441"
+master2_etcd_drive_wwn: "0x5002538b4986c6d0"
+
+# host info for MOC-R4PAC10U17-S3
+master3_hostname: "moc-r4pac10u17-s3"
+master3_ip: "10.20.18.20"
+master3_mac: "24:8a:07:1e:2d:82"
+master3_install_drive_serial: "S3FXNX0K607251"
+master3_etcd_drive_wwn: "0x5002538ae8689bb0"
+
+machine_network: 10.20.18.0/23
+rendezvous_ip: 10.20.18.20
+gateway_ip: 10.20.18.1
+dns_ip: 8.8.8.8
+cluster_network: 10.128.0.0/14
+svc_network: 172.30.0.0/16
+
+ntp: us.pool.ntp.org
+
+api_ip: 10.20.19.11
+ingress_ip: 10.20.19.12
+
+fips_enabled: true
+diskencryption_mode: tpmv2
+
+# Public key -- not sensitive, safe to track in plain YAML.
+ssh_public_key: >-
+  {{ lookup("ansible.builtin.file", [playbook_dir, "credentials", "nist-dev-infra", "nist-dev-infra-key.pub"]|join("/")) }}
