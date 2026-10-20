@@ -1,0 +1,14 @@
+all:
+  children:
+    oac-dev-infra:
+      hosts:
+        oac-dev-infra:
+          ansible_connection: local
+    oac-prod-infra:
+      hosts:
+        oac-prod-infra:
+          ansible_connection: local
+    nist-dev-infra:
+      hosts:
+        nist-dev-infra:
+          ansible_connection: local

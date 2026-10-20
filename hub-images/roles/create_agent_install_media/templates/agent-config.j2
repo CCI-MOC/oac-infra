@@ -1,0 +1,118 @@
+apiVersion: v1alpha1
+kind: AgentConfig
+metadata:
+  name: {{ cluster_domain_name|default(cluster_name) }}
+rendezvousIP: {{ rendezvous_ip }}
+additionalNTPSources:
+  - {{ ntp }}
+hosts:
+  - hostname: {{ master1_hostname }}
+    role: master
+    rootDeviceHints:
+      serialNumber: {{ master1_install_drive_serial }}
+    interfaces:
+      - name: eno1
+        macAddress: {{ master1_mac }}
+    networkConfig:
+      interfaces:
+        - name: eno1
+          type: ethernet
+          state: up
+          ipv4:
+            enabled: true
+            address:
+              - ip: {{ master1_ip }}
+                prefix-length: {{ machine_network | ansible.utils.ipaddr('prefix') }}
+            dhcp: false
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: {{ gateway_ip }}
+            next-hop-interface: eno1
+      dns-resolver:
+        config:
+          server:
+            - {{ dns_ip }}
+  - hostname: {{ master2_hostname }}
+    role: master
+    rootDeviceHints:
+      serialNumber: {{ master2_install_drive_serial }}
+    interfaces:
+      - name: eno1
+        macAddress: {{ master2_mac }}
+    networkConfig:
+      interfaces:
+        - name: eno1
+          type: ethernet
+          state: up
+          ipv4:
+            enabled: true
+            address:
+              - ip: {{ master2_ip }}
+                prefix-length: {{ machine_network | ansible.utils.ipaddr('prefix') }}
+            dhcp: false
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: {{ gateway_ip }}
+            next-hop-interface: eno1
+      dns-resolver:
+        config:
+          server:
+            - {{ dns_ip }}
+  - hostname: {{ master3_hostname }}
+    role: master
+    rootDeviceHints:
+      serialNumber: {{ master3_install_drive_serial }}
+    interfaces:
+      - name: eno1
+        macAddress: {{ master3_mac }}
+    networkConfig:
+      interfaces:
+        - name: eno1
+          type: ethernet
+          state: up
+          ipv4:
+            enabled: true
+            address:
+              - ip: {{ master3_ip }}
+                prefix-length: {{ machine_network | ansible.utils.ipaddr('prefix') }}
+            dhcp: false
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: {{ gateway_ip }}
+            next-hop-interface: eno1
+      dns-resolver:
+        config:
+          server:
+            - {{ dns_ip }}
+{% for worker in workers %}
+  - hostname: {{ worker.hostname }}
+    role: worker
+    rootDeviceHints:
+      serialNumber: {{ worker.install_drive_serial }}
+    interfaces:
+      - name: eno1
+        macAddress: {{ worker.mac }}
+    networkConfig:
+      interfaces:
+        - name: eno1
+          type: ethernet
+          state: up
+          ipv4:
+            enabled: true
+            address:
+              - ip: {{ worker.ip }}
+                prefix-length: {{ machine_network | ansible.utils.ipaddr('prefix') }}
+            dhcp: false
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: {{ gateway_ip }}
+            next-hop-interface: eno1
+      dns-resolver:
+        config:
+          server:
+            - {{ dns_ip }}
+{% endfor %}

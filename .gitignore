@@ -1,2 +1,5 @@
 .terraform/
 *.iso
+
+hub-images/output/
+hub-images/credentials/
