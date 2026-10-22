@@ -53,9 +53,9 @@ The nodes in rack R4PAC10 have been removed from ESI and dedicated to this proje
 |     Node Name      | Resource Class | IPMI Address |      Networking       | Purpose                   |
 | ------------------ | -------------- | ------------ | --------------------- | ------------------------- |
 | MOC-R4PAC10U37-S1A | fc430          | 10.2.13.191  | NIC1: 213, NIC2: 911  | Bastion                   |
-| MOC-R4PAC10U37-S1B | fc430          | 10.2.13.192  |                       |                           |
+| MOC-R4PAC10U37-S1B | fc430          | 10.2.13.192  |                       | Nist Dev Workload0        |
 | MOC-R4PAC10U37-S1C | fc430          | 10.2.13.193  |                       |                           |
-| MOC-R4PAC10U37-S1D | fc430          | 10.2.13.194  |                       |                           |
+| MOC-R4PAC10U37-S1D | fc430          | 10.2.13.194  |                       | Nist Dev Workload0        |
 | MOC-R4PAC10U37-S3C | fc430          | 10.2.13.197  | NIC1: 213, NIC2: 2311 | Prod Infra Control Plane  |
 | MOC-R4PAC10U35-S1A | fc430          | 10.2.13.181  |                       |                           |
 | MOC-R4PAC10U35-S1B | fc430          | 10.2.13.182  |                       |                           |

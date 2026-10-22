@@ -28,7 +28,7 @@
           retries: 12
           delay: 10
 
-    - name: Set power state for nodes through the BMC
+    - name: Set power state for nodes through the BMC (idrac)
       when: bm_management == "bmc" and bmc_type == "idrac"
       block:
         - name: Get power state
@@ -45,6 +45,29 @@
         - name: Wait for power off
           delegate_to: "{{ bmc_addr }}"
           ansible.builtin.raw: racadm serveraction powerstatus
+          register: power_state
+          until: >-
+            "off" in power_state.stdout|lower
+          retries: 12
+          delay: 10
+
+    - name: Set power state for nodes through the BMC (lenovo)
+      when: bm_management == "bmc" and bmc_type == "lenovo"
+      block:
+        - name: Get power state
+          delegate_to: "{{ bmc_addr }}"
+          ansible.builtin.raw: power status
+          register: power_state
+
+        - name: Power off node
+          delegate_to: "{{ bmc_addr }}"
+          when: >-
+            "off" not in power_state.stdout|lower
+          ansible.builtin.raw: power off
+
+        - name: Wait for power off
+          delegate_to: "{{ bmc_addr }}"
+          ansible.builtin.raw: power status
           register: power_state
           until: >-
             "off" in power_state.stdout|lower
@@ -102,7 +125,12 @@
       ansible.builtin.command: >-
         openstack baremetal node power on {{ node_name }}
 
-    - name: Power on node through the BMC
+    - name: Power on node through the BMC (idrac)
       when: bm_management == "bmc" and bmc_type == "idrac"
       delegate_to: "{{ bmc_addr }}"
       ansible.builtin.raw: racadm serveraction powerup
+
+    - name: Power on node through the BMC (lenovo)
+      when: bm_management == "bmc" and bmc_type == "lenovo"
+      delegate_to: "{{ bmc_addr }}"
+      ansible.builtin.raw: power on
