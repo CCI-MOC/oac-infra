@@ -213,6 +213,42 @@ all:
                 nist-dev-infra-control-2:
                   node_name: MOC-R4PAC10U17-S3
                   bmc_addr: 10.2.13.92
+        nist_dev_workload0:
+          vars:
+            cluster: nist-dev-workload0
+            bmc_type: idrac
+          children:
+            nist_dev_workload0_compute:
+              vars:
+                boot_image_url: "http://10.2.0.82/boot/nist-dev-infra-agent-workload-discovery.iso"
+                bm_management: bmc
+              hosts:
+                nist-dev-workload0-compute-0:
+                  node_name: MOC-R4PAC10U37-S1B
+                  bmc_addr: 10.2.13.192
+                  mac_addr: 40:5c:fd:65:f3:ef
+                  resource_class: fc430
+                nist-dev-workload0-compute-1:
+                  node_name: MOC-R4PAC10U37-S1D
+                  bmc_addr: 10.2.13.194
+                  mac_addr: 40:5c:fd:65:f9:a7
+                  resource_class: fc430
+            nist_dev_workload0_gpu:
+              vars:
+                bmc_type: lenovo
+                bm_management: bmc
+                boot_image_url: "http://10.2.0.82/boot/nist-dev-infra-agent-workload-discovery.iso"
+              hosts:
+                nist-dev-workload0-gpu-0:
+                  node_name: MOC-R4PCC02U35
+                  bmc_addr: 10.2.19.135
+                  mac_addr: a0:88:c2:27:c1:f0
+                  resource_class: lenovo-sd665nv3-h100
+                nist-dev-workload0-gpu-1:
+                  node_name: MOC-R4PCC04U32
+                  bmc_addr: 10.2.20.132
+                  mac_addr: a0:88:c2:27:c1:60
+                  resource_class: lenovo-sd665nv3-h100
     other_clusters:
       children:
         jetty:
