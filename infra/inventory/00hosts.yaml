@@ -279,3 +279,31 @@ all:
                 jetty-gpu-1:
                   node_name: MOC-R4PCC02U16
                   bmc_addr: 10.2.19.116
+        dizzy:
+          vars:
+            cluster: dizzy-infra
+            bm_management: bmc
+            bmc_type: idrac
+          children:
+            dizzy_infra_controller:
+              vars:
+                boot_image_url: "http://10.2.0.82/boot/dizzy-infra-agent.iso"
+              hosts:
+                # dizzy-infra-control-0:
+                #  node_name: MOC-R4PAC10U07-S1
+                #  bmc_addr: 10.2.13.41
+                #dizzy-infra-control-1:
+                #  node_name: MOC-R4PAC10U05-S1
+                #  bmc_addr: 10.2.13.31
+                #dizzy-infra-control-2:
+                #  node_name: MOC-R4PAC10U03-S1
+                #  bmc_addr: 10.2.13.21
+                dizzy-infra-control-3:
+                  node_name: MOC-R4PAC10U07-S3
+                  bmc_addr: 10.2.13.42
+                dizzy-infra-control-4:
+                  node_name: MOC-R4PAC10U05-S3
+                  bmc_addr: 10.2.13.32
+                dizzy-infra-control-5:
+                  node_name: MOC-R4PAC10U03-S3
+                  bmc_addr: 10.2.13.22

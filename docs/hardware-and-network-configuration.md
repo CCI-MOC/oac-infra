@@ -101,9 +101,9 @@ The nodes in rack R4PAC10 have been removed from ESI and dedicated to this proje
 | MOC-R4PAC10U11-S3  | fc830          | 10.2.13.62   | NIC1: 213, NIC2: 2311 | Prod Infra Compute (Temp) |
 | MOC-R4PAC10U09-S1  | fc830-nvme     | 10.2.13.51   |                       | * Boot Issue              |
 | MOC-R4PAC10U09-S3  | fc830          | 10.2.13.52   | NIC1: 213, NIC2: 2311 | Prod Infra Compute (Temp) |
-| MOC-R4PAC10U07-S1  | fc830          | 10.2.13.41   |                       |                           |
-| MOC-R4PAC10U07-S3  | fc830          | 10.2.13.42   |                       |                           |
-| MOC-R4PAC10U05-S1  | fc830          | 10.2.13.31   |                       |                           |
-| MOC-R4PAC10U05-S3  | fc830          | 10.2.13.32   |                       |                           |
-| MOC-R4PAC10U03-S1  | fc830          | 10.2.13.21   |                       |                           |
-| MOC-R4PAC10U03-S3  | fc830          | 10.2.13.22   |                       |                           |
+| MOC-R4PAC10U07-S1  | fc830          | 10.2.13.41   |                       | Disaster Recovery Infra   |
+| MOC-R4PAC10U07-S3  | fc830          | 10.2.13.42   |                       | Disaster Recovery Infra   |
+| MOC-R4PAC10U05-S1  | fc830          | 10.2.13.31   |                       | Disaster Recovery Infra   |
+| MOC-R4PAC10U05-S3  | fc830          | 10.2.13.32   |                       | Disaster Recovery Infra   |
+| MOC-R4PAC10U03-S1  | fc830          | 10.2.13.21   |                       | Disaster Recovery Infra   |
+| MOC-R4PAC10U03-S3  | fc830          | 10.2.13.22   |                       | Disaster Recovery Infra   |

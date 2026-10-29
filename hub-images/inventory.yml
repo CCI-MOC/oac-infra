@@ -12,3 +12,7 @@ all:
       hosts:
         nist-dev-infra:
           ansible_connection: local
+    dizzy-infra:
+      hosts:
+        dizzy-infra:
+          ansible_connection: local
