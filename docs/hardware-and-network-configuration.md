@@ -57,7 +57,7 @@ The nodes in rack R4PAC10 have been removed from ESI and dedicated to this proje
 | MOC-R4PAC10U37-S1C | fc430          | 10.2.13.193  |                       |                           |
 | MOC-R4PAC10U37-S1D | fc430          | 10.2.13.194  |                       | Nist Dev Workload0        |
 | MOC-R4PAC10U37-S3C | fc430          | 10.2.13.197  | NIC1: 213, NIC2: 2311 | Prod Infra Control Plane  |
-| MOC-R4PAC10U35-S1A | fc430          | 10.2.13.181  |                       |                           |
+| MOC-R4PAC10U35-S1A | fc430          | 10.2.13.181  | NIC1: 223, NIC2: 2321 | BU IST Demo Infra Control |
 | MOC-R4PAC10U35-S1B | fc430          | 10.2.13.182  |                       |                           |
 | MOC-R4PAC10U35-S1C | fc430          | 10.2.13.183  |                       |                           |
 | MOC-R4PAC10U35-S1D | fc430          | 10.2.13.184  |                       |                           |
@@ -67,14 +67,14 @@ The nodes in rack R4PAC10 have been removed from ESI and dedicated to this proje
 | MOC-R4PAC10U33-S1A | fc430          | 10.2.13.171  | NIC1: 213, NIC2: 2311 | Prod Infra Control Plane  |
 | MOC-R4PAC10U33-S1B | fc430          | 10.2.13.172  |                       | * Disk Issue              |
 | MOC-R4PAC10U33-S1C | fc430          | 10.2.13.173  |                       | Dev Workload1             |
-| MOC-R4PAC10U33-S1D | fc430          | 10.2.13.174  |                       |                           |
+| MOC-R4PAC10U33-S1D | fc430          | 10.2.13.174  | NIC1: 223, NIC2: 2321 | BU IST Demo Infra Control |
 | MOC-R4PAC10U33-S3A | fc430          | 10.2.13.175  |                       | * Won't Power On          |
 | MOC-R4PAC10U33-S3B | fc430          | 10.2.13.176  |                       | Dev Workload1             |
 | MOC-R4PAC10U33-S3C | fc430          | 10.2.13.177  |                       |                           |
 | MOC-R4PAC10U33-S3D | fc430          | 10.2.13.178  |                       |                           |
-| MOC-R4PAC10U31-S1A | fc430          | 10.2.13.161  |                       |                           |
-| MOC-R4PAC10U31-S1B | fc430          | 10.2.13.162  |                       |                           |
-| MOC-R4PAC10U31-S1C | fc430          | 10.2.13.163  |                       |                           |
+| MOC-R4PAC10U31-S1A | fc430          | 10.2.13.161  | NIC1: 223, NIC2: 2321 | BU IST Demo Infra Control |
+| MOC-R4PAC10U31-S1B | fc430          | 10.2.13.162  | NIC1: 224, NIC2: 2322 | BU IST Demo Workload      |
+| MOC-R4PAC10U31-S1C | fc430          | 10.2.13.163  | NIC1: 224, NIC2: 2322 | BU IST Demo Workload      |
 | MOC-R4PAC10U31-S1D | fc430          | 10.2.13.164  |                       |                           |
 | MOC-R4PAC10U31-S3A | fc430          | 10.2.13.165  |                       |                           |
 | MOC-R4PAC10U31-S3B | fc430          | 10.2.13.166  |                       |                           |
