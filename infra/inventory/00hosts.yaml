@@ -249,6 +249,45 @@ all:
                   bmc_addr: 10.2.20.132
                   mac_addr: a0:88:c2:27:c1:60
                   resource_class: lenovo-sd665nv3-h100
+    bu_ist_demo_clusters:
+      children:
+        bu_ist_demo_infra:
+          vars:
+            cluster: bu-ist-demo-infra
+            bm_management: bmc
+            bmc_type: idrac
+          children:
+            bu_ist_demo_infra_controller:
+              vars:
+                # switch to bu-ist-demo-infra-agent.iso once the hub image is built
+                boot_image_url: "http://10.2.0.82/boot/discovery.iso"
+              hosts:
+                bu-ist-demo-infra-control-0:
+                  node_name: MOC-R4PAC10U31-S1A
+                  bmc_addr: 10.2.13.161
+                bu-ist-demo-infra-control-1:
+                  node_name: MOC-R4PAC10U33-S1D
+                  bmc_addr: 10.2.13.174
+                bu-ist-demo-infra-control-2:
+                  node_name: MOC-R4PAC10U35-S1A
+                  bmc_addr: 10.2.13.181
+        bu_ist_demo_workload0:
+          vars:
+            cluster: bu-ist-demo-workload0
+            bm_management: bmc
+            bmc_type: idrac
+          children:
+            bu_ist_demo_workload0_compute:
+              vars:
+                # switch to the workload discovery iso once the hub image is built
+                boot_image_url: "http://10.2.0.82/boot/discovery.iso"
+              hosts:
+                bu-ist-demo-workload0-compute-0:
+                  node_name: MOC-R4PAC10U31-S1B
+                  bmc_addr: 10.2.13.162
+                bu-ist-demo-workload0-compute-1:
+                  node_name: MOC-R4PAC10U31-S1C
+                  bmc_addr: 10.2.13.163
     other_clusters:
       children:
         jetty:
