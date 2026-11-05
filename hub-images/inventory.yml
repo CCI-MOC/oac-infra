@@ -16,3 +16,7 @@ all:
       hosts:
         dizzy-infra:
           ansible_connection: local
+    bu-ist-demo-infra:
+      hosts:
+        bu-ist-demo-infra:
+          ansible_connection: local
