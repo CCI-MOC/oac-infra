@@ -11,6 +11,7 @@
 | Prod Workload       | 216     | 10.20.12.0/23 |
 | BU IST Demo Infra    | 223     | 10.20.26.0/23 |
 | BU IST Demo Workload | 224     | 10.20.28.0/23 |
+| OAC Bare Metal 1    | 225     | 10.20.30.0/24 |
 | PureStorage Infra   | 2311    | 10.9.1.0/24   |
 | PureStorage Staging | 2312    | 10.9.2.0/24   |
 | PureStorage Prod    | 2313    | 10.9.8.0/22   |
@@ -45,6 +46,8 @@
 |    Node Name    | Resource Class | IPMI Address |      Networking       | Purpose                  |
 | ----------------| -------------- | ------------ | --------------------- | ------------------------ |
 | MOC-R4PCC02U30  | h100           | 10.2.19.130  | NIC1: 216, NIC2: 2313 | Prod Workload Compute    |
+| MOC-R4PCC02U32  | h100           | 10.2.19.132  | NIC1: 225             | OAC Bare Metal           |
+| MOC-R4PCC04U03  | h100           | 10.2.20.103  | NIC1: 225             | OAC Bare Metal           |
 | MOC-R4PCC04U09  | h100           | 10.2.20.109  | NIC1: 216, NIC2: 2313 | Prod Workload Compute    |
 | MOC-R4PCC04U11  | h100           | 10.2.20.111  | NIC1: 216, NIC2: 2313 | Prod Workload Compute    |
 | MOC-R4PCC04U12  | h100           | 10.2.20.112  | NIC1: 216, NIC2: 2313 | Prod Workload Compute    |
