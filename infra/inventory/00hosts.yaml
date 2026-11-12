@@ -346,3 +346,18 @@ all:
                 dizzy-infra-control-5:
                   node_name: MOC-R4PAC10U03-S3
                   bmc_addr: 10.2.13.22
+        ark-cohort:
+          vars:
+            bmc_type: lenovo
+            bm_management: bmc
+            boot_image_url: "http://10.2.0.82/boot/rhel-10.3-x86_64-boot.iso"
+            ansible_user: root
+          hosts:
+            ark-1:
+              ansible_host: 10.20.30.21
+              bmc_addr: 10.2.19.132
+              node_name: MOC-R4PCC02U32
+            ark-2:
+              ansible_host: 10.20.30.20
+              bmc_addr: 10.2.20.103
+              node_name: MOC-R4PCC04U03
