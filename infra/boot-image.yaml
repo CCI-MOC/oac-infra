@@ -56,7 +56,7 @@
       block:
         - name: Get power state
           delegate_to: "{{ bmc_addr }}"
-          ansible.builtin.raw: power status
+          ansible.builtin.raw: power state
           register: power_state
 
         - name: Power off node
@@ -67,7 +67,7 @@
 
         - name: Wait for power off
           delegate_to: "{{ bmc_addr }}"
-          ansible.builtin.raw: power status
+          ansible.builtin.raw: power state
           register: power_state
           until: >-
             "off" in power_state.stdout|lower
