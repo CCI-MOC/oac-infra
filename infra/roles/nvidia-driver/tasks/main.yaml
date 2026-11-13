@@ -1,0 +1,29 @@
+- name: Blacklist nouveau driver
+  ansible.builtin.copy:
+    src: nouveau-blacklist.conf
+    dest: /etc/modprobe.d/nouveau-blacklist.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: update-initrd
+
+- name: Enable RHSM repositories
+  tags: [packages]
+  community.general.rhsm_repository:
+    name: "{{ item }}"
+  loop: "{{ nvidia_rhsm_repositories }}"
+
+- name: Enable repo repositories (.repo files)
+  tags: [packages]
+  ansible.builtin.get_url:
+    url: "{{ item.url }}"
+    dest: "/etc/yum.repos.d/{{ item.name }}"
+    mode: '0644'
+  loop: "{{ nvidia_remote_repositories }}"
+
+- name: Install packages
+  tags: [packages]
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: installed
+  loop: "{{ nvidia_packages }}"
