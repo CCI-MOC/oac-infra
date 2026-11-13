@@ -1,0 +1,57 @@
+- name: Set system hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Populate /etc/hosts
+  ansible.builtin.blockinfile:
+    path: /etc/hosts
+    block: |
+      {% for host in groups["ark_cohort"] %}
+      {{ hostvars[host].ansible_host }} {{ host }}
+      {% endfor %}
+
+- name: Configure sshd
+  ansible.builtin.copy:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config.d/00-local-policy.conf
+    owner: root
+    group: root
+    mode: "0400"
+  notify: restart-sshd
+
+- name: Configure groups
+  ansible.builtin.group:
+    state: present
+    name: "{{ item.name }}"
+  loop: "{{ ark_cohort_groups }}"
+
+- name: Configure sudo access for ark-users
+  ansible.builtin.copy:
+    src: sudoers
+    dest: /etc/sudoers.d/ark-users
+    owner: root
+    group: root
+    mode: '0440'
+
+- name: Add users
+  ansible.builtin.user:
+    name: "{{ item.username }}"
+    comment: "{{ item.fullname }}"
+    create_home: true
+    groups:
+      - ark-users
+  loop: "{{ ark_cohort_users }}"
+
+- name: Add user ssh keys
+  ansible.builtin.authorized_key:
+    user: "{{ item.username }}"
+    key: "{{ item.sshkey }}"
+  loop: "{{ ark_cohort_users }}"
+
+- name: Install epel-release repository
+  ansible.builtin.include_role:
+    name: epel-release
+
+- name: Install nvidia driver
+  ansible.builtin.include_role:
+    name: nvidia-driver

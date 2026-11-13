@@ -1,0 +1,5 @@
+- hosts: ark_cohort
+  gather_facts: false
+  tasks:
+    - import_role:
+        name: ark-cohort
