@@ -1,0 +1,12 @@
+nvidia_rhsm_repositories:
+  - codeready-builder-for-rhel-10-x86_64-rpms
+  - rhel-10-for-x86_64-extensions-rpms
+
+nvidia_remote_repositories:
+  - url: https://developer.download.nvidia.com/compute/cuda/repos/rhel10/x86_64/cuda-rhel10.repo
+    name: cuda-rhel10.repo
+
+nvidia_packages:
+  - kmod-nvidia-open
+  - nvidia-driver
+  - nvidia-driver-cuda

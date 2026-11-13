@@ -1,0 +1,9 @@
+- name: Restart sshd
+  listen: restart-sshd
+  ansible.builtin.service:
+    name: sshd
+    state: restarted
+
+- name: Update initrd (this takes a while)
+  listen: update-initrd
+  ansible.builtin.command: dracut -f
