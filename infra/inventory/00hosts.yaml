@@ -286,10 +286,12 @@ all:
                   node_name: MOC-R4PAC10U31-S1B
                   bmc_addr: 10.2.13.162
                   mac_addr: 10:7d:1a:9c:49:29
+                  resource_class: fc430
                 bu-ist-demo-workload0-compute-1:
                   node_name: MOC-R4PAC10U31-S1C
                   bmc_addr: 10.2.13.163
                   mac_addr: 10:7d:1a:9c:49:af
+                  resource_class: fc430
     other_clusters:
       children:
         jetty:
