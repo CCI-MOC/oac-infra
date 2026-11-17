@@ -30,9 +30,9 @@
 
 |     Node Name      | Resource Class | IPMI Address | Networking | Purpose                  |
 | ------------------ | -------------- | ------------ | ---------- | ------------------------ |
-| ?? R440-1 ??       | r440           | 10.3.10.114  | NIC1: 213  | Prod Infra Compute       |
-| ?? R440-2 ??       | r440           | 10.3.10.115  | NIC1: 213  | Prod Infra Compute       |
-| ?? R440-3 ??       | r440           | 10.3.10.116  | NIC1: 213  | Prod Infra Compute       |
+| MOC-R440-U14       | r440           | 10.3.10.114  |            | Compliant Dev Infra Control |
+| MOC-R440-U15       | r440           | 10.3.10.115  |            | Compliant Dev Infra Control |
+| MOC-R440-U16       | r440           | 10.3.10.116  |            | Compliant Dev Infra Control |
 
 ### A100s
 
@@ -82,9 +82,9 @@ The nodes in rack R4PAC10 have been removed from ESI and dedicated to this proje
 | MOC-R4PAC10U31-S1A | fc430          | 10.2.13.161  | NIC1: 223, NIC2: 2321 | BU IST Demo Infra Control |
 | MOC-R4PAC10U31-S1B | fc430          | 10.2.13.162  | NIC1: 224, NIC2: 2322 | BU IST Demo Workload      |
 | MOC-R4PAC10U31-S1C | fc430          | 10.2.13.163  | NIC1: 224, NIC2: 2322 | BU IST Demo Workload      |
-| MOC-R4PAC10U31-S1D | fc430          | 10.2.13.164  |                       |                           |
-| MOC-R4PAC10U31-S3A | fc430          | 10.2.13.165  |                       |                           |
-| MOC-R4PAC10U31-S3B | fc430          | 10.2.13.166  |                       |                           |
+| MOC-R4PAC10U31-S1D | fc430          | 10.2.13.164  |                       | Compliant Dev Infra Worker |
+| MOC-R4PAC10U31-S3A | fc430          | 10.2.13.165  |                       | Compliant Dev Infra Worker |
+| MOC-R4PAC10U31-S3B | fc430          | 10.2.13.166  |                       | Compliant Dev Infra Worker |
 | MOC-R4PAC10U31-S3C | fc430          | 10.2.13.167  |                       |                           |
 | MOC-R4PAC10U31-S3D | fc430          | 10.2.13.168  |                       |                           |
 | MOC-R4PAC10U29-S1  | fc830-nvme     | 10.2.13.151  | NIC1: 214, NIC2: 2312 | Staging Workload Compute  |
