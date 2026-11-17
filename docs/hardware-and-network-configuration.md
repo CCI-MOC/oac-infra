@@ -11,12 +11,14 @@
 | Prod Workload       | 216     | 10.20.12.0/23 |
 | BU IST Demo Infra    | 223     | 10.20.26.0/23 |
 | BU IST Demo Workload | 224     | 10.20.28.0/23 |
+| NIST Dev Infra      | 219     | 10.20.18.0/23 |
 | OAC Bare Metal 1    | 225     | 10.20.30.0/24 |
 | PureStorage Infra   | 2311    | 10.9.1.0/24   |
 | PureStorage Staging | 2312    | 10.9.2.0/24   |
 | PureStorage Prod    | 2313    | 10.9.8.0/22   |
 | PureStorage BU IST Demo Infra    | 2321 | 10.9.15.0/24 |
 | PureStorage BU IST Demo Workload | 2322 | 10.9.16.0/24 |
+| PureStorage NIST Dev Infra | 2317 | 10.9.7.0/24 |
 
 ### Other Networks
 
@@ -30,9 +32,9 @@
 
 |     Node Name      | Resource Class | IPMI Address | Networking | Purpose                  |
 | ------------------ | -------------- | ------------ | ---------- | ------------------------ |
-| MOC-R440-U14       | r440           | 10.3.10.114  |            | Compliant Dev Infra Control |
-| MOC-R440-U15       | r440           | 10.3.10.115  |            | Compliant Dev Infra Control |
-| MOC-R440-U16       | r440           | 10.3.10.116  |            | Compliant Dev Infra Control |
+| MOC-R440-U14       | r440           | 10.3.10.114  | NIC1: 219, NIC2: 2317 | Compliant Dev Infra Control |
+| MOC-R440-U15       | r440           | 10.3.10.115  | NIC1: 219, NIC2: 2317 | Compliant Dev Infra Control |
+| MOC-R440-U16       | r440           | 10.3.10.116  | NIC1: 219, NIC2: 2317 | Compliant Dev Infra Control |
 
 ### A100s
 
@@ -82,9 +84,9 @@ The nodes in rack R4PAC10 have been removed from ESI and dedicated to this proje
 | MOC-R4PAC10U31-S1A | fc430          | 10.2.13.161  | NIC1: 223, NIC2: 2321 | BU IST Demo Infra Control |
 | MOC-R4PAC10U31-S1B | fc430          | 10.2.13.162  | NIC1: 224, NIC2: 2322 | BU IST Demo Workload      |
 | MOC-R4PAC10U31-S1C | fc430          | 10.2.13.163  | NIC1: 224, NIC2: 2322 | BU IST Demo Workload      |
-| MOC-R4PAC10U31-S1D | fc430          | 10.2.13.164  |                       | Compliant Dev Infra Worker |
-| MOC-R4PAC10U31-S3A | fc430          | 10.2.13.165  |                       | Compliant Dev Infra Worker |
-| MOC-R4PAC10U31-S3B | fc430          | 10.2.13.166  |                       | Compliant Dev Infra Worker |
+| MOC-R4PAC10U31-S1D | fc430          | 10.2.13.164  | NIC1: 219, NIC2: 2317 | Compliant Dev Infra Worker |
+| MOC-R4PAC10U31-S3A | fc430          | 10.2.13.165  | NIC1: 219, NIC2: 2317 | Compliant Dev Infra Worker |
+| MOC-R4PAC10U31-S3B | fc430          | 10.2.13.166  | NIC1: 219, NIC2: 2317 | Compliant Dev Infra Worker |
 | MOC-R4PAC10U31-S3C | fc430          | 10.2.13.167  |                       |                           |
 | MOC-R4PAC10U31-S3D | fc430          | 10.2.13.168  |                       |                           |
 | MOC-R4PAC10U29-S1  | fc830-nvme     | 10.2.13.151  | NIC1: 214, NIC2: 2312 | Staging Workload Compute  |
