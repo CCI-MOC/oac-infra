@@ -244,8 +244,7 @@ all:
           children:
             compliant_dev_infra_controller:
               vars:
-                # switch to compliant-dev-infra-agent.x86_64.iso once the hub image is built
-                boot_image_url: "http://10.2.0.82/boot/discovery-r440.iso"
+                boot_image_url: "http://10.2.0.82/boot/compliant-dev-infra-agent.x86_64.iso"
               hosts:
                 compliant-dev-infra-control-0:
                   node_name: MOC-R440-U14
@@ -258,8 +257,7 @@ all:
                   bmc_addr: 10.3.10.116
             compliant_dev_infra_compute:
               vars:
-                # switch to compliant-dev-infra-agent.x86_64.iso once the hub image is built
-                boot_image_url: "http://10.2.0.82/boot/discovery.iso"
+                boot_image_url: "http://10.2.0.82/boot/compliant-dev-infra-agent.x86_64.iso"
               hosts:
                 compliant-dev-infra-compute-0:
                   node_name: MOC-R4PAC10U31-S1D
