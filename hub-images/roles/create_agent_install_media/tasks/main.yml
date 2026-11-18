@@ -74,6 +74,17 @@
     mode: '0755'
     src: 98-master-var-lib-etcd.j2
 
+- name: Create 98-worker-lvms-disk.yaml
+  # Encrypts each worker's LVM Storage disk against Tang; LVM Storage then
+  # uses /dev/mapper/lvms. Only with Tang, and for workers with lvms_drive_wwn.
+  when: >-
+    diskencryption_mode == "tang" and
+    (workers | selectattr('lvms_drive_wwn', 'defined') | list | length) > 0
+  ansible.builtin.template:
+    dest: "{{ work_dir }}/openshift/98-worker-lvms-disk.yaml"
+    mode: '0644'
+    src: 98-worker-lvms-disk.j2
+
 - name: Create rendered manifests backup directory
   ansible.builtin.file:
     path: "{{ rendered_manifests_dir }}"
