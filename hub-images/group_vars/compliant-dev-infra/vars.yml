@@ -36,25 +36,30 @@ master3_etcd_drive_wwn: "0x55cd2e414ef110e8"
 # serials from the discovery ISO; each one's second disk is left for LVM
 # Storage. IPs as the discovery boot shows them on the console (DHCP).
 # Port 1 (eth0) is on the cluster network (VLAN 219), port 2 (eth1) on
-# storage (2317), per ansible-switches #148. Each has two 186 GiB SSDs: sda
-# for the install, sdb for LVM Storage. S1D's BIOS was in UEFI mode, the
+# storage (2317), per ansible-switches #148. Each has two 186 GiB SSDs, one
+# for the install (by serial) and one for LVM Storage (lvms_drive_wwn,
+# encrypted against Tang); their sdX names change between boots, so neither
+# is named that way. S1D's BIOS was in UEFI mode, the
 # others' in legacy BIOS mode; it was switched to BIOS on 2026-11-18 to match.
 workers:
-  # MOC-R4PAC10U31-S1D (sdb WWN 0x55cd2e414db91780)
+  # MOC-R4PAC10U31-S1D
   - hostname: "moc-r4pac10u31-s1d"
     ip: "10.20.18.26"
     mac: "10:7d:1a:9c:4f:67"
     install_drive_serial: "BTHC714603ZM200QGN"
-  # MOC-R4PAC10U31-S3A (sdb WWN 0x55cd2e414db9178e)
+    lvms_drive_wwn: "0x55cd2e414db91780"
+  # MOC-R4PAC10U31-S3A
   - hostname: "moc-r4pac10u31-s3a"
     ip: "10.20.18.28"
     mac: "10:7d:1a:9c:48:db"
     install_drive_serial: "BTHC714603YW200QGN"
-  # MOC-R4PAC10U31-S3B (sdb WWN 0x55cd2e414db9177c)
+    lvms_drive_wwn: "0x55cd2e414db9178e"
+  # MOC-R4PAC10U31-S3B
   - hostname: "moc-r4pac10u31-s3b"
     ip: "10.20.18.27"
     mac: "10:7d:1a:9c:4b:1d"
     install_drive_serial: "BTHC71460473200QGN"
+    lvms_drive_wwn: "0x55cd2e414db9177c"
 
 machine_network: 10.20.18.0/23
 rendezvous_ip: 10.20.18.23

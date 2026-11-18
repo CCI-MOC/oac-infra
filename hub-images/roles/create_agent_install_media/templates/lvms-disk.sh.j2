@@ -1,0 +1,35 @@
+#!/bin/bash
+# Set up and unlock this worker's LVM Storage disk, picked by hostname, as
+# LUKS2 unlocked only through Tang (clevis), like the root disk. LVM Storage
+# then uses /dev/mapper/lvms. The disk is wiped once per install (the stamp
+# is on the root disk, which every install rewrites) and never while open.
+# Used only when diskencryption_mode is tang.
+set -euo pipefail
+
+case "$(hostname)" in
+{% for w in workers if w.lvms_drive_wwn is defined %}
+  *{{ w.hostname }}*) WWN="{{ w.lvms_drive_wwn }}" ;;
+{% endfor %}
+  *) exit 0 ;;
+esac
+DISK="/dev/disk/by-id/wwn-$WWN"
+PART=/dev/disk/by-partlabel/lvms
+STAMP=/etc/lvms-disk.done
+
+if [ ! -e "$STAMP" ] && [ ! -e /dev/mapper/lvms ]; then
+  sgdisk -Z "$DISK"
+  sgdisk -n 1:0:0 -c 1:lvms "$DISK"
+  udevadm settle
+  KEY=$(mktemp /run/lvms-disk-key.XXXXXX)
+  head -c 64 /dev/urandom > "$KEY"
+  # pbkdf2: argon2 is not allowed in FIPS mode.
+  cryptsetup luksFormat -q --type luks2 --pbkdf pbkdf2 --key-file "$KEY" "$PART"
+{% set pins = [] %}{% for t in tang_servers %}{% set _ = pins.append({"url": t.url, "thp": t.thumbprint}) %}{% endfor %}
+  clevis luks bind -y -k "$KEY" -d "$PART" sss '{{ {"t": 1, "pins": {"tang": pins}} | to_json }}'
+  cryptsetup luksRemoveKey "$PART" --key-file "$KEY"
+  rm -f "$KEY"
+  clevis luks unlock -d "$PART" -n lvms
+  touch "$STAMP"
+fi
+
+[ -e /dev/mapper/lvms ] || clevis luks unlock -d "$PART" -n lvms
