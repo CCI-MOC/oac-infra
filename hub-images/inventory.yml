@@ -20,3 +20,7 @@ all:
       hosts:
         bu-ist-demo-infra:
           ansible_connection: local
+    compliant-dev-infra:
+      hosts:
+        compliant-dev-infra:
+          ansible_connection: local
