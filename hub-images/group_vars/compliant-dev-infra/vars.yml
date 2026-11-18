@@ -1,0 +1,78 @@
+---
+cluster_domain_name: compliant-dev-infra
+base_domain: nist.int.massopen.cloud
+
+# Control plane: three R440s. Workers: three FC430s.
+# install_drive_serial/etcd_drive_wwn from `lsblk -o NAME,SIZE,SERIAL,WWN` on
+# each node (discovery ISO, tzumainn 2026-11-17). Each R440 has two 447 GiB
+# SSDs, sda (install) and sdb (etcd), plus four 5.8 TiB NVMe left unused.
+# The MAC is the NIC on the cluster network (eth2 under discovery); the
+# installer finds it by MAC, so the eno1 label in agent-config.j2 is only a
+# name. etcd_drive_wwn MUST be quoted -- YAML parses an unquoted 0x...
+# value as a hex integer, and Jinja renders it back in decimal.
+
+# host info for MOC-R440-U14
+master1_hostname: "moc-r440-u14"
+master1_ip: "10.20.18.23"
+master1_mac: "b4:96:91:4c:b7:ac"
+master1_install_drive_serial: "BTYG918103EJ480BGN"
+master1_etcd_drive_wwn: "0x55cd2e414e2e18e1"
+
+# host info for MOC-R440-U15
+master2_hostname: "moc-r440-u15"
+master2_ip: "10.20.18.24"
+master2_mac: "b4:96:91:22:ad:d8"
+master2_install_drive_serial: "BTYS802106NJ480BGN"
+master2_etcd_drive_wwn: "0x55cd2e414ef11123"
+
+# host info for MOC-R440-U16
+master3_hostname: "moc-r440-u16"
+master3_ip: "10.20.18.25"
+master3_mac: "b4:96:91:4c:c7:b0"
+master3_install_drive_serial: "BTYS802209NH480BGN"
+master3_etcd_drive_wwn: "0x55cd2e414ef110e8"
+
+# Workers: three FC430s (tzumainn, 2026-11-17). MACs and install disk
+# serials from the discovery ISO; each one's second disk is left for LVM
+# Storage. IPs as the discovery boot shows them on the console (DHCP).
+# Port 1 (eth0) is on the cluster network (VLAN 219), port 2 (eth1) on
+# storage (2317), per ansible-switches #148. Each has two 186 GiB SSDs: sda
+# for the install, sdb for LVM Storage. S1D's BIOS was in UEFI mode, the
+# others' in legacy BIOS mode; it was switched to BIOS on 2026-11-18 to match.
+workers:
+  # MOC-R4PAC10U31-S1D (sdb WWN 0x55cd2e414db91780)
+  - hostname: "moc-r4pac10u31-s1d"
+    ip: "10.20.18.26"
+    mac: "10:7d:1a:9c:4f:67"
+    install_drive_serial: "BTHC714603ZM200QGN"
+  # MOC-R4PAC10U31-S3A (sdb WWN 0x55cd2e414db9178e)
+  - hostname: "moc-r4pac10u31-s3a"
+    ip: "10.20.18.28"
+    mac: "10:7d:1a:9c:48:db"
+    install_drive_serial: "BTHC714603YW200QGN"
+  # MOC-R4PAC10U31-S3B (sdb WWN 0x55cd2e414db9177c)
+  - hostname: "moc-r4pac10u31-s3b"
+    ip: "10.20.18.27"
+    mac: "10:7d:1a:9c:4b:1d"
+    install_drive_serial: "BTHC71460473200QGN"
+
+machine_network: 10.20.18.0/23
+rendezvous_ip: 10.20.18.23
+gateway_ip: 10.20.18.1
+dns_ip: 8.8.8.8
+cluster_network: 10.128.0.0/14
+svc_network: 172.30.0.0/16
+
+ntp: us.pool.ntp.org
+
+api_ip: 10.20.19.11
+ingress_ip: 10.20.19.12
+
+fips_enabled: true
+# No disk encryption: a recorded exception (MOC-issues #672). The R440s' TPMs
+# are faulty (#670) and the FC430s have none.
+diskencryption_mode: ""
+
+# Public key -- not sensitive, safe to track in plain YAML.
+ssh_public_key: >-
+  {{ lookup("ansible.builtin.file", [playbook_dir, "credentials", "compliant-dev-infra", "compliant-dev-infra-key.pub"]|join("/")) }}
