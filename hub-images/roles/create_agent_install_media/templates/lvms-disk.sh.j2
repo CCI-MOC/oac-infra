@@ -6,6 +6,16 @@
 # Used only when diskencryption_mode is tang.
 set -euo pipefail
 
+# Tang can be briefly unreachable while the node's network settles, so
+# retry the unlock for up to five minutes before giving up.
+unlock() {
+  for _ in $(seq 1 30); do
+    clevis luks unlock -d "$PART" -n lvms && return 0
+    sleep 10
+  done
+  return 1
+}
+
 case "$(hostname)" in
 {% for w in workers if w.lvms_drive_wwn is defined %}
   *{{ w.hostname }}*) WWN="{{ w.lvms_drive_wwn }}" ;;
@@ -28,8 +38,8 @@ if [ ! -e "$STAMP" ] && [ ! -e /dev/mapper/lvms ]; then
   clevis luks bind -y -k "$KEY" -d "$PART" sss '{{ {"t": 1, "pins": {"tang": pins}} | to_json }}'
   cryptsetup luksRemoveKey "$PART" --key-file "$KEY"
   rm -f "$KEY"
-  clevis luks unlock -d "$PART" -n lvms
+  unlock
   touch "$STAMP"
 fi
 
-[ -e /dev/mapper/lvms ] || clevis luks unlock -d "$PART" -n lvms
+[ -e /dev/mapper/lvms ] || unlock

@@ -24,9 +24,11 @@ spec:
             [Unit]
             Description=Set up and unlock this master's etcd disk
             DefaultDependencies=no
-            # Tang is reached over the network.
+            # Tang is reached over the network. On first boot,
+            # ovs-configuration moves the node's address onto br-ex after the
+            # network is first online, so wait for that too.
             Wants=network-online.target
-            After=network-online.target
+            After=network-online.target ovs-configuration.service
             Before=var-lib-etcd.mount kubelet.service
 
             [Service]

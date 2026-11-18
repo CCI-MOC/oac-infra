@@ -7,6 +7,16 @@
 # root disk. Used only when diskencryption_mode is tang.
 set -euo pipefail
 
+# Tang can be briefly unreachable while the node's network settles, so
+# retry the unlock for up to five minutes before giving up.
+unlock() {
+  for _ in $(seq 1 30); do
+    clevis luks unlock -d "$PART" -n etcd && return 0
+    sleep 10
+  done
+  return 1
+}
+
 case "$(hostname)" in
   *{{ master1_hostname }}*) WWN="{{ master1_etcd_drive_wwn }}" ;;
   *{{ master2_hostname }}*) WWN="{{ master2_etcd_drive_wwn }}" ;;
@@ -30,9 +40,9 @@ if [ ! -e "$STAMP" ] && [ ! -e /dev/mapper/etcd ]; then
   clevis luks bind -y -k "$KEY" -d "$PART" sss '{{ {"t": 1, "pins": {"tang": pins}} | to_json }}'
   cryptsetup luksRemoveKey "$PART" --key-file "$KEY"
   rm -f "$KEY"
-  clevis luks unlock -d "$PART" -n etcd
+  unlock
   mkfs.xfs -f /dev/mapper/etcd
   touch "$STAMP"
 fi
 
-[ -e /dev/mapper/etcd ] || clevis luks unlock -d "$PART" -n etcd
+[ -e /dev/mapper/etcd ] || unlock
