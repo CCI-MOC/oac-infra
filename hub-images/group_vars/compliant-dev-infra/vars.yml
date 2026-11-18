@@ -69,9 +69,13 @@ api_ip: 10.20.19.11
 ingress_ip: 10.20.19.12
 
 fips_enabled: true
-# No disk encryption: a recorded exception (MOC-issues #672). The R440s' TPMs
-# are faulty (#670) and the FC430s have none.
-diskencryption_mode: ""
+# Network-bound disk encryption (MOC-issues #672): root disks, and the
+# masters' etcd disks, unlock through Tang. No TPM: the R440s' are faulty
+# (#670) and the FC430s have none. Thumbprint from tang-show-keys on the server.
+diskencryption_mode: tang
+tang_servers:
+  - url: "http://172.16.1.1:80"
+    thumbprint: "bE20pSI2fW6K6DjHtBwjFosH9XgBV0VsA11247u-qfI"
 
 # Public key -- not sensitive, safe to track in plain YAML.
 ssh_public_key: >-
