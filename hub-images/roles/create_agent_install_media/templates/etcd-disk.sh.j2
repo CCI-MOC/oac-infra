@@ -1,0 +1,38 @@
+#!/bin/bash
+# Set up and unlock this master's etcd disk, picked by hostname. The disk is
+# wiped once per install: the stamp lives on the root disk, which every
+# install rewrites, so an etcd disk left over from an earlier install is
+# never reused.
+# The partition is LUKS2, unlocked only through Tang (clevis), like the
+# root disk. Used only when diskencryption_mode is tang.
+set -euo pipefail
+
+case "$(hostname)" in
+  *{{ master1_hostname }}*) WWN="{{ master1_etcd_drive_wwn }}" ;;
+  *{{ master2_hostname }}*) WWN="{{ master2_etcd_drive_wwn }}" ;;
+  *{{ master3_hostname }}*) WWN="{{ master3_etcd_drive_wwn }}" ;;
+  *) exit 0 ;;
+esac
+DISK="/dev/disk/by-id/wwn-$WWN"
+PART=/dev/disk/by-partlabel/etcd
+STAMP=/etc/etcd-disk.done
+
+# Never wipe a disk that is already open: that is a running etcd.
+if [ ! -e "$STAMP" ] && [ ! -e /dev/mapper/etcd ]; then
+  sgdisk -Z "$DISK"
+  sgdisk -n 1:0:0 -c 1:etcd "$DISK"
+  udevadm settle
+  KEY=$(mktemp /run/etcd-disk-key.XXXXXX)
+  head -c 64 /dev/urandom > "$KEY"
+  # pbkdf2: argon2 is not allowed in FIPS mode.
+  cryptsetup luksFormat -q --type luks2 --pbkdf pbkdf2 --key-file "$KEY" "$PART"
+{% set pins = [] %}{% for t in tang_servers %}{% set _ = pins.append({"url": t.url, "thp": t.thumbprint}) %}{% endfor %}
+  clevis luks bind -y -k "$KEY" -d "$PART" sss '{{ {"t": 1, "pins": {"tang": pins}} | to_json }}'
+  cryptsetup luksRemoveKey "$PART" --key-file "$KEY"
+  rm -f "$KEY"
+  clevis luks unlock -d "$PART" -n etcd
+  mkfs.xfs -f /dev/mapper/etcd
+  touch "$STAMP"
+fi
+
+[ -e /dev/mapper/etcd ] || clevis luks unlock -d "$PART" -n etcd

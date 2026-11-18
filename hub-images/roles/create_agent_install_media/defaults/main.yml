@@ -4,5 +4,9 @@
 # for network booting instead. Override with -e boot_method=pxe.
 boot_method: iso
 openshift_install: "{% if fips_enabled|bool %}openshift-install-fips{% else %}openshift-install{% endif %}"
+# tpmv2, tang, or "" for none. With tang, tang_servers lists each server's
+# url and thumbprint (tang-show-keys on the server), and the masters' etcd
+# disks are encrypted against the same servers.
 diskencryption_mode: tpmv2
+tang_servers: []
 workers: []

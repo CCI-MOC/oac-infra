@@ -109,6 +109,18 @@
           enableOn: all
           mode: tpmv2
 
+- name: Insert Tang configuration into agent-cluster-install.yaml
+  when: >-
+    diskencryption_mode == "tang"
+  ansible.builtin.blockinfile:
+    path: "{{ work_dir }}/cluster-manifests/agent-cluster-install.yaml"
+    insertafter: '^\s*spec:\s*$'
+    block: |2
+        diskEncryption:
+          enableOn: all
+          mode: tang
+          tangServers: '{{ tang_servers | to_json }}'
+
 - name: Backup install directory to preserve generated files
   ansible.builtin.copy:
     src: "{{ work_dir }}/"
