@@ -309,6 +309,19 @@ all:
                   node_name: MOC-R4PAC10U31-S1C
                   bmc_addr: 10.2.13.163
                   mac_addr: 10:7d:1a:9c:49:af
+            bu_ist_demo_workload0_gpu:
+              vars:
+                # Lenovo SD665-N V3, so XCC rather than the iDRAC the FC430s use.
+                bmc_type: lenovo
+                boot_image_url: "http://10.2.0.82/boot/bu-ist-demo-infra-agent-discovery.iso"
+              hosts:
+                bu-ist-demo-workload0-gpu-0:
+                  node_name: MOC-R4PCC02U37
+                  bmc_addr: 10.2.19.137
+                  # TODO: fill in once the node has booted the discovery ISO and
+                  # registered; update-agents.yaml matches the agent by MAC.
+                  # mac_addr:
+                  resource_class: lenovo-sd665nv3-h100
     other_clusters:
       children:
         jetty:
