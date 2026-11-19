@@ -318,9 +318,10 @@ all:
                 bu-ist-demo-workload0-gpu-0:
                   node_name: MOC-R4PCC02U37
                   bmc_addr: 10.2.19.137
-                  # TODO: fill in once the node has booted the discovery ISO and
-                  # registered; update-agents.yaml matches the agent by MAC.
-                  # mac_addr:
+                  # enp195s0np0, the 400G NIC on BU-IST-DEMO-WORKLOAD (224);
+                  # the node's other NIC, enp163s0np0 / a0:88:c2:27:c3:64, is on
+                  # the PureStorage VLAN (2322).
+                  mac_addr: a0:88:c2:27:c3:60
                   resource_class: lenovo-sd665nv3-h100
     other_clusters:
       children:
