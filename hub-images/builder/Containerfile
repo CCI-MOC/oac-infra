@@ -1,0 +1,47 @@
+# Toolchain for building hub boot media (hub-images/), one image per
+# OpenShift release. Build it on the FIPS build host, which is a subscribed
+# RHEL 9 system, so dnf inside the build sees the full RHEL repos.
+#
+#   podman build --secret id=pull,src=pull-secret.json \
+#     --build-arg OCP_RELEASE=4.22.14 -t hub-image-builder:4.22.14 .
+#
+# The image only works on a FIPS host: FIPS mode is the host kernel's, and
+# openshift-install-fips refuses to make FIPS media without it.
+FROM registry.access.redhat.com/ubi9/ubi:latest
+
+ARG OCP_RELEASE
+ARG ANSIBLE_UTILS_VERSION=5.1.2
+
+RUN test -n "$OCP_RELEASE" || { echo "set --build-arg OCP_RELEASE"; exit 1; }
+
+# ansible-core and netaddr (for ansible.utils' ipaddr filter), nmstate
+# (openshift-install needs nmstatectl to check agent-config's networkConfig),
+# and what the installer shells out to.
+RUN dnf -y install ansible-core python3-netaddr nmstate \
+      openssl tar gzip xz rsync openssh-clients jq && \
+    dnf clean all
+
+# oc first, then openshift-install-fips extracted from the release itself, so
+# the installer matches OCP_RELEASE exactly. The pull secret is a build
+# secret: it is not left in any layer.
+RUN curl -fsSL "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/${OCP_RELEASE}/openshift-client-linux-amd64-rhel9-${OCP_RELEASE}.tar.gz" \
+      | tar -xz -C /usr/local/bin oc && \
+    oc version --client
+RUN --mount=type=secret,id=pull \
+    cd /usr/local/bin && \
+    oc adm release extract --registry-config=/run/secrets/pull \
+      --command=openshift-install-fips \
+      "quay.io/openshift-release-dev/ocp-release:${OCP_RELEASE}-x86_64" && \
+    test -x /usr/local/bin/openshift-install-fips
+
+# boto3 for Secrets Manager (build.sh): pure Python on RHEL's OpenSSL, unlike
+# the AWS CLI v2 bundle, which carries its own.
+ARG BOTO3_VERSION=1.35.99
+RUN dnf -y install python3-pip && dnf clean all && \
+    pip3 install --no-cache-dir "boto3==${BOTO3_VERSION}"
+
+RUN ansible-galaxy collection install -p /usr/share/ansible/collections \
+      "ansible.utils:==${ANSIBLE_UTILS_VERSION}"
+
+LABEL io.massopen.cloud/ocp-release="${OCP_RELEASE}"
+WORKDIR /work/hub-images
