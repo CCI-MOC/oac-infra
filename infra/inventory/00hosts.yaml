@@ -323,6 +323,14 @@ all:
                   # the PureStorage VLAN (2322).
                   mac_addr: a0:88:c2:27:c3:60
                   resource_class: lenovo-sd665nv3-h100
+                bu-ist-demo-workload0-gpu-1:
+                  node_name: MOC-R4PCC02U10
+                  bmc_addr: 10.2.19.110
+                  # TODO: fill in once the node has booted the discovery ISO and
+                  # registered; update-agents.yaml matches the agent by MAC. Use
+                  # the NIC on VLAN 224 (swp19s0), not the 2322 one (swp19s1).
+                  # mac_addr:
+                  resource_class: lenovo-sd665nv3-h100
     other_clusters:
       children:
         jetty:

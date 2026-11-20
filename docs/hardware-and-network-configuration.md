@@ -47,6 +47,7 @@
 
 |    Node Name    | Resource Class | IPMI Address |      Networking       | Purpose                  |
 | ----------------| -------------- | ------------ | --------------------- | ------------------------ |
+| MOC-R4PCC02U10  | h100           | 10.2.19.110  | NIC1: 224, NIC2: 2322 | BU IST Demo Workload0 GPU |
 | MOC-R4PCC02U30  | h100           | 10.2.19.130  | NIC1: 216, NIC2: 2313 | Prod Workload Compute    |
 | MOC-R4PCC02U32  | h100           | 10.2.19.132  | NIC1: 225             | OAC Bare Metal           |
 | MOC-R4PCC02U37  | h100           | 10.2.19.137  | NIC1: 224, NIC2: 2322 | BU IST Demo Workload0 GPU |
