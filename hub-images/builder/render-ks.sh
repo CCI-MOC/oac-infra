@@ -7,6 +7,7 @@
 set -euo pipefail
 pub=${1:?usage: render-ks.sh <ssh public key file>}
 grep -q -E '^(ecdsa-|ssh-rsa )' "$pub" || { echo "need an ECDSA or RSA key (FIPS rejects Ed25519)" >&2; exit 1; }
+[ "$(grep -c . "$pub")" = 1 ] || { echo "$pub must hold exactly one key, on one line" >&2; exit 1; }
 here=$(cd "$(dirname "$0")" && pwd)
 aws secretsmanager get-secret-value --secret-id hub-images/rhsm \
     --query SecretString --output text |

@@ -5,13 +5,15 @@
 # (Secrets Manager `hub-images/rhsm`) and the builder's SSH key, then:
 # boot the RHEL 9 installer with  inst.ks=<url of the rendered file> fips=1
 # The rendered file holds the activation key: serve it only for the install,
-# then delete it. Network: DHCP, below.
+# then delete it. Network: DHCP on VLAN 911, below.
 
 text
 lang en_US.UTF-8
 keyboard us
 timezone UTC --utc
-network --bootproto=dhcp --hostname=fips-builder --activate
+# The first ConnectX port (TORS-A, VLAN 911). Named, because the first
+# connected device is the XCC's USB link (169.254.95.x), which has no route.
+network --device=ens5f0np0 --bootproto=dhcp --hostname=fips-builder --activate
 rootpw --lock
 user --name=builder --groups=wheel --lock
 sshkey --username=builder "@SSH_PUBKEY@"
