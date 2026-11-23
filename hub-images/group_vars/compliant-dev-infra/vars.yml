@@ -78,7 +78,12 @@ fips_enabled: true
 # masters' etcd disks, unlock through Tang. No TPM: the R440s' are faulty
 # (#670) and the FC430s have none. Thumbprint from tang-show-keys on the server.
 diskencryption_mode: tang
+# The same server twice, by name (moc-dns #41) and by address: the
+# installer binds with threshold 1, so either unlocks. The name survives a
+# move (copy the keys); the address works without DNS at boot.
 tang_servers:
+  - url: "http://tang.massopen.cloud:80"
+    thumbprint: "bE20pSI2fW6K6DjHtBwjFosH9XgBV0VsA11247u-qfI"
   - url: "http://172.16.1.1:80"
     thumbprint: "bE20pSI2fW6K6DjHtBwjFosH9XgBV0VsA11247u-qfI"
 
