@@ -268,6 +268,27 @@ all:
                 compliant-dev-infra-compute-2:
                   node_name: MOC-R4PAC10U31-S3B
                   bmc_addr: 10.2.13.166
+        compliant_dev_workload0:
+          vars:
+            cluster: compliant-dev-workload0
+          children:
+            compliant_dev_workload0_gpu:
+              vars:
+                # Lenovo SD665-N V3, so XCC rather than iDRAC. Booted from the
+                # hub's own discovery ISO (its InfraEnv), mounted through each
+                # XCC's web console: the XCC rejects the hub's Let's Encrypt
+                # certificate, so there is no boot_image_url here.
+                bmc_type: lenovo
+                bm_management: bmc
+              hosts:
+                compliant-dev-workload0-gpu-0:
+                  node_name: MOC-R4PCC02U15
+                  bmc_addr: 10.2.19.115
+                  resource_class: lenovo-sd665nv3-h100
+                compliant-dev-workload0-gpu-1:
+                  node_name: MOC-R4PCC02U16
+                  bmc_addr: 10.2.19.116
+                  resource_class: lenovo-sd665nv3-h100
     bu_ist_demo_clusters:
       children:
         bu_ist_demo_infra:
@@ -330,34 +351,6 @@ all:
                   resource_class: lenovo-sd665nv3-h100
     other_clusters:
       children:
-        jetty:
-          vars:
-            network_name: jetty-net
-            bmc_type: idrac
-            boot_image_url: "http://10.2.0.82/boot/jetty-discovery.iso"
-            cluster: jetty
-          children:
-            jetty_controller:
-              hosts:
-                jetty-0:
-                  node_name: MOC-R4PAC08U35-S3D
-                  bmc_addr: 10.2.14.188
-                jetty-1:
-                  node_name: MOC-R4PAC08U31-S1A
-                  bmc_addr: 10.2.14.161
-                jetty-2:
-                  node_name: MOC-R4PAC08U31-S1B
-                  bmc_addr: 10.2.14.162
-            jetty_gpu:
-              vars:
-                bmc_type: lenovo
-              hosts:
-                jetty-gpu-0:
-                  node_name: MOC-R4PCC02U15
-                  bmc_addr: 10.2.19.115
-                jetty-gpu-1:
-                  node_name: MOC-R4PCC02U16
-                  bmc_addr: 10.2.19.116
         dizzy:
           vars:
             cluster: dizzy-infra
