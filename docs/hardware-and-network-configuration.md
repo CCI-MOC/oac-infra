@@ -64,9 +64,9 @@ The nodes in rack R4PAC10 have been removed from ESI and dedicated to this proje
 |     Node Name      | Resource Class | IPMI Address |      Networking       | Purpose                   |
 | ------------------ | -------------- | ------------ | --------------------- | ------------------------- |
 | MOC-R4PAC10U37-S1A | fc430          | 10.2.13.191  | NIC1: 213, NIC2: 911  | Bastion                   |
-| MOC-R4PAC10U37-S1B | fc430          | 10.2.13.192  |                       | Nist Dev Workload0        |
+| MOC-R4PAC10U37-S1B | fc430          | 10.2.13.192  |                       |                           |
 | MOC-R4PAC10U37-S1C | fc430          | 10.2.13.193  |                       |                           |
-| MOC-R4PAC10U37-S1D | fc430          | 10.2.13.194  |                       | Nist Dev Workload0        |
+| MOC-R4PAC10U37-S1D | fc430          | 10.2.13.194  |                       |                           |
 | MOC-R4PAC10U37-S3C | fc430          | 10.2.13.197  | NIC1: 213, NIC2: 2311 | Prod Infra Control Plane  |
 | MOC-R4PAC10U35-S1A | fc430          | 10.2.13.181  | NIC1: 223, NIC2: 2321 | BU IST Demo Infra Control |
 | MOC-R4PAC10U35-S1B | fc430          | 10.2.13.182  |                       |                           |
@@ -103,10 +103,10 @@ The nodes in rack R4PAC10 have been removed from ESI and dedicated to this proje
 | MOC-R4PAC10U21-S3  | fc830          | 10.2.13.112  |                       | * IPMI Unreachable        |
 | MOC-R4PAC10U19-S1  | fc830          | 10.2.13.101  | NIC1: 213, NIC2: 2311 | Prod Infra Compute (Temp) |
 | MOC-R4PAC10U19-S3  | fc830          | 10.2.13.102  |                       | * Won't power on          |
-| MOC-R4PAC10U17-S3  | fc830          | 10.2.13.92   |                       | Nist Dev Infra            |
-| MOC-R4PAC10U15-S1  | fc830          | 10.2.13.81   |                       | Nist Dev Infra            |
+| MOC-R4PAC10U17-S3  | fc830          | 10.2.13.92   |                       |                           |
+| MOC-R4PAC10U15-S1  | fc830          | 10.2.13.81   |                       |                           |
 | MOC-R4PAC10U15-S3  | fc830          | 10.2.13.82   |                       |                           |
-| MOC-R4PAC10U13-S1  | fc830          | 10.2.13.71   |                       | Nist Dev Infra            |
+| MOC-R4PAC10U13-S1  | fc830          | 10.2.13.71   |                       |                           |
 | MOC-R4PAC10U13-S3  | fc830          | 10.2.13.72   |                       | * Boot Issue              |
 | MOC-R4PAC10U11-S1  | fc830          | 10.2.13.61   |                       | * Boot Issue              |
 | MOC-R4PAC10U11-S3  | fc830          | 10.2.13.62   | NIC1: 213, NIC2: 2311 | Prod Infra Compute (Temp) |
