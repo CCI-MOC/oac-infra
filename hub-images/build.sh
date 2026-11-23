@@ -15,7 +15,9 @@
 # SSH access to the bastion. The host stores no AWS credentials: the session's
 # temporary keys are passed into the containers for this run only. Environment overrides: AWS_PROFILE,
 # PULL_SECRET_ID (default hub-images/pull-secret), BASTION (default
-# 10.2.0.82), BASTION_BOOT_DIR (default /srv/boot), NO_UPLOAD=1.
+# 10.2.0.82), BASTION_BOOT_DIR (default /srv/boot), NO_UPLOAD=1 (keep the ISO
+# here), NO_STORE=1 (do not store the kubeconfig: for test runs, which would
+# otherwise replace a live hub's cluster/<name>/kubeadmin).
 set -euo pipefail
 cluster=${1:?usage: build.sh <cluster-name> [iso|pxe]}
 boot_method=${2:-iso}
@@ -50,7 +52,7 @@ if ! podman image exists "$image"; then
   rm -f "$ps"
 fi
 
-podman run --rm "${aws[@]}" -e PULL_SECRET_ID \
+podman run --rm "${aws[@]}" -e PULL_SECRET_ID -e NO_STORE \
   -v "$repo:/work:z" "$image" /work/hub-images/builder/in-container.sh "$cluster" "$boot_method"
 
 if [ "$boot_method" = iso ] && [ -z "${NO_UPLOAD:-}" ]; then
