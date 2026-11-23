@@ -109,6 +109,7 @@
             url_username: "{{ bmc_user }}"
             url_password: "{{ bmc_password }}"
             validate_certs: false
+            force_basic_auth: true
             method: PATCH
             body_format: json
             body: |
