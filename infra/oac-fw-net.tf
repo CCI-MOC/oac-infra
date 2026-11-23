@@ -63,16 +63,3 @@ resource "openstack_networking_port_v2" "oac-dev-workload0-port" {
     ip_address = "10.20.0.60"
   }
 }
-
-resource "openstack_networking_port_v2" "oac-fw-jetty-port" {
-  provider       = openstack.admin
-  name           = "oac-fw-jetty-port"
-  network_id     = openstack_networking_network_v2.oac-fw-net.id
-  admin_state_up = "true"
-  tenant_id      = data.openstack_identity_project_v3.open-accelerator.id
-
-  fixed_ip {
-    subnet_id  = openstack_networking_subnet_v2.oac-fw-net.id
-    ip_address = "10.20.0.80"
-  }
-}

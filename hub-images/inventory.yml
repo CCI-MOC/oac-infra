@@ -8,10 +8,6 @@ all:
       hosts:
         oac-prod-infra:
           ansible_connection: local
-    nist-dev-infra:
-      hosts:
-        nist-dev-infra:
-          ansible_connection: local
     dizzy-infra:
       hosts:
         dizzy-infra:
