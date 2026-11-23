@@ -46,7 +46,7 @@ if ! podman image exists "$image"; then
   echo "Building $image"
   ps=$(mktemp); trap 'rm -f "$ps"' EXIT
   podman run --rm "${aws[@]}" -v "$PWD/builder:/b:ro,z" registry.access.redhat.com/ubi9/ubi:latest \
-    sh -c 'dnf -q -y install python3-pip >/dev/null && pip3 -q install boto3 && python3 /b/secrets.py get "$0" /dev/stdout' \
+    sh -c 'dnf -q -y install python3-pip >/dev/null && pip3 -q install boto3 && python3 /b/sm.py get "$0" /dev/stdout' \
     "${PULL_SECRET_ID:-hub-images/pull-secret}" > "$ps"
   podman build --secret id=pull,src="$ps" --build-arg OCP_RELEASE="$release" -t "$image" builder
   rm -f "$ps"
