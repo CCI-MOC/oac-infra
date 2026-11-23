@@ -27,6 +27,16 @@ the run only, stores the kubeconfig as `cluster/<name>/kubeadmin`, and copies
 the ISO to the bastion's `/srv/boot/<name>-agent.x86_64.iso`. See the comments
 in `build.sh` for its settings.
 
+A test run, which changes nothing outside the build host:
+
+```bash
+NO_STORE=1 NO_UPLOAD=1 AWS_PROFILE=<profile> ./build.sh compliant-dev-infra
+```
+
+Without `NO_STORE=1`, a run replaces the hub's `cluster/<name>/kubeadmin`
+with the new, not-yet-installed cluster's kubeconfig; without `NO_UPLOAD=1`,
+it replaces the ISO on the bastion.
+
 - **The host:** RHEL 9 installed in FIPS mode from `builder/fips-builder.ks`,
   rendered by `builder/render-ks.sh` with the registration from Secrets
   Manager `hub-images/rhsm` and the builder's SSH key.

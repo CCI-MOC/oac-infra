@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Secrets Manager access for build.sh, inside the builder container.
 
-  secrets.py get <secret-id> <file>     write the secret (string or binary) to file, mode 0600
-  secrets.py put <secret-id> <file>     store file as a binary secret, creating it if needed
+  sm.py get <secret-id> <file>     write the secret (string or binary) to file, mode 0600
+  sm.py put <secret-id> <file>     store file as a binary secret, creating it if needed
 """
 import os
 import sys
@@ -10,7 +10,9 @@ import sys
 import boto3
 
 cmd, sid, path = sys.argv[1:4]
-sm = boto3.client("secretsmanager")
+# Old boto3 (the last for UBI 9's Python 3.9) reads only AWS_DEFAULT_REGION.
+sm = boto3.client("secretsmanager",
+                  region_name=os.environ.get("AWS_REGION") or os.environ.get("AWS_DEFAULT_REGION"))
 if cmd == "get":
     v = sm.get_secret_value(SecretId=sid)
     data = v["SecretBinary"] if "SecretBinary" in v else v["SecretString"].encode()
