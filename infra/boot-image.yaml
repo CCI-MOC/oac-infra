@@ -88,8 +88,8 @@
         - racadm set idrac.serverboot.FirstBootDevice VCD-DVD
         - racadm set idrac.serverboot.BootOnce 1
 
-    - name: Configure virtual media (lenovo)
-      when: bmc_type == "lenovo"
+    - name: Configure virtual media (lenovo, rdmount)
+      when: bmc_type == "lenovo" and (virtual_media_method | default("rdmount")) == "rdmount"
       block:
         - name: Mount boot image
           delegate_to: "{{ bmc_addr }}"
@@ -109,6 +109,63 @@
             url_username: "{{ bmc_user }}"
             url_password: "{{ bmc_password }}"
             validate_certs: false
+            force_basic_auth: true
+            method: PATCH
+            body_format: json
+            body: |
+              {
+                "Boot": {
+                  "BootSourceOverrideTarget": "Cd",
+                  "BootSourceOverrideMode": "UEFI",
+                  "BootSourceOverrideEnabled": "Once"
+                }
+              }
+
+    - name: Configure virtual media (lenovo, redfish)
+      when: bmc_type == "lenovo" and (virtual_media_method | default("rdmount")) == "redfish"
+      block:
+        - name: Eject existing virtual media
+          delegate_to: localhost
+          ansible.builtin.uri:
+            url: "https://{{ bmc_addr }}/redfish/v1/Managers/1/VirtualMedia/EXT1"
+            url_username: "{{ bmc_user }}"
+            url_password: "{{ bmc_password }}"
+            validate_certs: false
+            force_basic_auth: true
+            method: PATCH
+            body_format: json
+            body: |
+              {
+                "Image": null,
+                "Inserted": false
+              }
+            status_code: [200, 204]
+          failed_when: false
+
+        - name: Mount boot image
+          delegate_to: localhost
+          ansible.builtin.uri:
+            url: "https://{{ bmc_addr }}/redfish/v1/Managers/1/VirtualMedia/EXT1"
+            url_username: "{{ bmc_user }}"
+            url_password: "{{ bmc_password }}"
+            validate_certs: false
+            force_basic_auth: true
+            method: PATCH
+            body_format: json
+            body: |
+              {
+                "Image": "{{ boot_image_url }}",
+                "Inserted": true
+              }
+
+        - name: Request one-time boot from virtual media
+          delegate_to: localhost
+          ansible.builtin.uri:
+            url: "https://{{ bmc_addr }}/redfish/v1/Systems/1"
+            url_username: "{{ bmc_user }}"
+            url_password: "{{ bmc_password }}"
+            validate_certs: false
+            force_basic_auth: true
             method: PATCH
             body_format: json
             body: |
