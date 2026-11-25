@@ -37,74 +37,74 @@ The networking for these nodes are configured through [MOC2-CORE-1](https://gith
 
 |     Node Name      | Resource Class | IPMI Address | Networking | Purpose                  |
 | ------------------ | -------------- | ------------ | ---------- | ------------------------ |
-| MOC-R440-U14       | r440           | 10.3.10.114  | NIC1: 219, NIC2: 2317 | Compliant Dev Infra Control |
-| MOC-R440-U15       | r440           | 10.3.10.115  | NIC1: 219, NIC2: 2317 | Compliant Dev Infra Control |
-| MOC-R440-U16       | r440           | 10.3.10.116  | NIC1: 219, NIC2: 2317 | Compliant Dev Infra Control |
-| MOC-R440-U17       | r440           | 10.3.10.117  |                       |                             |
-| MOC-R440-U18       | r440           | 10.3.10.118  |                       |                             |
-| MOC-R440-U19       | r440           | 10.3.10.119  |                       |                             |
-| MOC-R440-U20       | r440           | 10.3.10.120  |                       |                             |
-| MOC-R440-U21       | r440           | 10.3.10.121  |                       |                             |
+| MOC-R440-U14       | r440           | 10.3.10.114  | NIC1: 219, NIC2: 2317 | Compliant Dev Infra Control  |
+| MOC-R440-U15       | r440           | 10.3.10.115  | NIC1: 219, NIC2: 2317 | Compliant Dev Infra Control  |
+| MOC-R440-U16       | r440           | 10.3.10.116  | NIC1: 219, NIC2: 2317 | Compliant Dev Infra Control  |
+| MOC-R440-U17       | r440           | 10.3.10.117  |                       | Memory Fault (could be fine) |
+| MOC-R440-U18       | r440           | 10.3.10.118  | NIC1: 226, NIC2: 2323 | Compliant Prod Infra Control |
+| MOC-R440-U19       | r440           | 10.3.10.119  | NIC1: 226, NIC2: 2323 | Compliant Prod Infra Control |
+| MOC-R440-U20       | r440           | 10.3.10.120  | NIC1: 226, NIC2: 2323 | Compliant Prod Infra Control |
+| MOC-R440-U21       | r440           | 10.3.10.121  |                       |                              |
 
 ### SD530s
 
 The networking for these nodes are configured through [MOC2-R4PCC06-SW-TORS-A](https://github.com/CCI-MOC/ansible-switches/blob/main/host_vars/MOC2-R4PCC06-SW-TORS-A/interfaces.yaml) and
 [MOC2-R4PCC06-SW-TORS-B](https://github.com/CCI-MOC/ansible-switches/blob/main/host_vars/MOC2-R4PCC06-SW-TORS-B/interfaces.yaml).
 
-|     Node Name      | Resource Class | IPMI Address |       Networking      | Purpose                  |
-| ------------------ | -------------- | ------------ | --------------------- | ------------------------ |
-| MOC-R4PCC06U01-N01 | sd530          | 10.2.22.51   | NIC1: 911             | FIPS Build Host          |
-| MOC-R4PCC06U01-N02 | sd530          | 10.2.22.52   |                       |                          |
-| MOC-R4PCC06U01-N03 | sd530          | 10.2.22.53   |                       |                          |
-| MOC-R4PCC06U01-N04 | sd530          | 10.2.22.54   |                       |                          |
-| MOC-R4PCC06U03-N01 | sd530          | 10.2.22.61   |                       |                          |
-| MOC-R4PCC06U03-N02 | sd530          | 10.2.22.62   |                       |                          |
-| MOC-R4PCC06U03-N03 | sd530          | 10.2.22.63   |                       |                          |
-| MOC-R4PCC06U03-N04 | sd530          | 10.2.22.64   |                       |                          |
-| MOC-R4PCC06U05-N01 | sd530          | 10.2.22.71   |                       |                          |
-| MOC-R4PCC06U05-N02 | sd530          | 10.2.22.72   |                       |                          |
-| MOC-R4PCC06U05-N03 | sd530          | 10.2.22.73   |                       |                          |
-| MOC-R4PCC06U05-N04 | sd530          | 10.2.22.74   |                       |                          |
-| MOC-R4PCC06U07-N01 | sd530          | 10.2.22.81   |                       |                          |
-| MOC-R4PCC06U07-N02 | sd530          | 10.2.22.82   |                       |                          |
-| MOC-R4PCC06U07-N03 | sd530          | 10.2.22.83   |                       |                          |
-| MOC-R4PCC06U07-N04 | sd530          | 10.2.22.84   |                       |                          |
-| MOC-R4PCC06U09-N01 | sd530          | 10.2.22.91   |                       |                          |
-| MOC-R4PCC06U09-N02 | sd530          | 10.2.22.92   |                       |                          |
-| MOC-R4PCC06U09-N03 | sd530          | 10.2.22.93   |                       |                          |
-| MOC-R4PCC06U09-N04 | sd530          | 10.2.22.94   |                       |                          |
-| MOC-R4PCC06U11-N01 | sd530          | 10.2.22.101  |                       |                          |
-| MOC-R4PCC06U11-N02 | sd530          | 10.2.22.102  |                       |                          |
-| MOC-R4PCC06U11-N03 | sd530          | 10.2.22.103  |                       |                          |
-| MOC-R4PCC06U11-N04 | sd530          | 10.2.22.104  |                       |                          |
-| MOC-R4PCC06U13-N01 | sd530          | 10.2.22.111  |                       |                          |
-| MOC-R4PCC06U13-N02 | sd530          | 10.2.22.112  |                       |                          |
-| MOC-R4PCC06U13-N03 | sd530          | 10.2.22.113  |                       |                          |
-| MOC-R4PCC06U13-N04 | sd530          | 10.2.22.114  |                       |                          |
-| MOC-R4PCC06U15-N01 | sd530          | 10.2.22.121  |                       |                          |
-| MOC-R4PCC06U15-N02 | sd530          | 10.2.22.122  |                       |                          |
-| MOC-R4PCC06U15-N03 | sd530          | 10.2.22.123  |                       |                          |
-| MOC-R4PCC06U15-N04 | sd530          | 10.2.22.124  |                       |                          |
-| MOC-R4PCC06U17-N01 | sd530          | 10.2.22.131  |                       |                          |
-| MOC-R4PCC06U17-N02 | sd530          | 10.2.22.132  |                       |                          |
-| MOC-R4PCC06U17-N03 | sd530          | 10.2.22.133  |                       |                          |
-| MOC-R4PCC06U17-N04 | sd530          | 10.2.22.134  |                       |                          |
-| MOC-R4PCC06U19-N01 | sd530          | 10.2.22.141  |                       |                          |
-| MOC-R4PCC06U19-N02 | sd530          | 10.2.22.142  |                       |                          |
-| MOC-R4PCC06U19-N03 | sd530          | 10.2.22.143  |                       |                          |
-| MOC-R4PCC06U19-N04 | sd530          | 10.2.22.144  |                       |                          |
-| MOC-R4PCC06U21-N01 | sd530          | 10.2.22.151  |                       | DOWN FOR NOW             |
-| MOC-R4PCC06U21-N02 | sd530          | 10.2.22.152  |                       | DOWN FOR NOW             |
-| MOC-R4PCC06U21-N03 | sd530          | 10.2.22.153  |                       | DOWN FOR NOW             |
-| MOC-R4PCC06U21-N04 | sd530          | 10.2.22.154  |                       | DOWN FOR NOW             |
-| MOC-R4PCC06U23-N01 | sd530          | 10.2.22.161  |                       |                          |
-| MOC-R4PCC06U23-N02 | sd530          | 10.2.22.162  |                       |                          |
-| MOC-R4PCC06U23-N03 | sd530          | 10.2.22.163  |                       |                          |
-| MOC-R4PCC06U23-N04 | sd530          | 10.2.22.164  |                       |                          |
-| MOC-R4PCC06U25-N01 | sd530          | 10.2.22.171  |                       |                          |
-| MOC-R4PCC06U25-N02 | sd530          | 10.2.22.172  |                       |                          |
-| MOC-R4PCC06U25-N03 | sd530          | 10.2.22.173  |                       |                          |
-| MOC-R4PCC06U25-N04 | sd530          | 10.2.22.174  |                       |                          |
+|     Node Name      | Resource Class | IPMI Address |       Networking      | Purpose                     |
+| ------------------ | -------------- | ------------ | --------------------- | --------------------------- |
+| MOC-R4PCC06U01-N01 | sd530          | 10.2.22.51   | NIC1: 911             | FIPS Build Host             |
+| MOC-R4PCC06U01-N02 | sd530          | 10.2.22.52   | NIC1: 226, NIC2: 2323 | Compliant Prod Infra Worker |
+| MOC-R4PCC06U01-N03 | sd530          | 10.2.22.53   |                       |                             |
+| MOC-R4PCC06U01-N04 | sd530          | 10.2.22.54   |                       |                             |
+| MOC-R4PCC06U03-N01 | sd530          | 10.2.22.61   | NIC1: 226, NIC2: 2323 | Compliant Prod Infra Worker |
+| MOC-R4PCC06U03-N02 | sd530          | 10.2.22.62   |                       |                             |
+| MOC-R4PCC06U03-N03 | sd530          | 10.2.22.63   |                       |                             |
+| MOC-R4PCC06U03-N04 | sd530          | 10.2.22.64   |                       |                             |
+| MOC-R4PCC06U05-N01 | sd530          | 10.2.22.71   | NIC1: 226, NIC2: 2323 | Compliant Prod Infra Worker |
+| MOC-R4PCC06U05-N02 | sd530          | 10.2.22.72   |                       |                             |
+| MOC-R4PCC06U05-N03 | sd530          | 10.2.22.73   |                       |                             |
+| MOC-R4PCC06U05-N04 | sd530          | 10.2.22.74   |                       |                             |
+| MOC-R4PCC06U07-N01 | sd530          | 10.2.22.81   | NIC1: 226, NIC2: 2323 | Compliant Prod Infra Worker |
+| MOC-R4PCC06U07-N02 | sd530          | 10.2.22.82   |                       |                             |
+| MOC-R4PCC06U07-N03 | sd530          | 10.2.22.83   |                       |                             |
+| MOC-R4PCC06U07-N04 | sd530          | 10.2.22.84   |                       |                             |
+| MOC-R4PCC06U09-N01 | sd530          | 10.2.22.91   | NIC1: 226, NIC2: 2323 | Compliant Prod Infra Worker |
+| MOC-R4PCC06U09-N02 | sd530          | 10.2.22.92   |                       |                             |
+| MOC-R4PCC06U09-N03 | sd530          | 10.2.22.93   |                       |                             |
+| MOC-R4PCC06U09-N04 | sd530          | 10.2.22.94   |                       |                             |
+| MOC-R4PCC06U11-N01 | sd530          | 10.2.22.101  |                       |                             |
+| MOC-R4PCC06U11-N02 | sd530          | 10.2.22.102  |                       |                             |
+| MOC-R4PCC06U11-N03 | sd530          | 10.2.22.103  |                       |                             |
+| MOC-R4PCC06U11-N04 | sd530          | 10.2.22.104  |                       |                             |
+| MOC-R4PCC06U13-N01 | sd530          | 10.2.22.111  |                       |                             |
+| MOC-R4PCC06U13-N02 | sd530          | 10.2.22.112  |                       |                             |
+| MOC-R4PCC06U13-N03 | sd530          | 10.2.22.113  |                       |                             |
+| MOC-R4PCC06U13-N04 | sd530          | 10.2.22.114  |                       |                             |
+| MOC-R4PCC06U15-N01 | sd530          | 10.2.22.121  |                       |                             |
+| MOC-R4PCC06U15-N02 | sd530          | 10.2.22.122  |                       |                             |
+| MOC-R4PCC06U15-N03 | sd530          | 10.2.22.123  |                       |                             |
+| MOC-R4PCC06U15-N04 | sd530          | 10.2.22.124  |                       |                             |
+| MOC-R4PCC06U17-N01 | sd530          | 10.2.22.131  |                       |                             |
+| MOC-R4PCC06U17-N02 | sd530          | 10.2.22.132  |                       |                             |
+| MOC-R4PCC06U17-N03 | sd530          | 10.2.22.133  |                       |                             |
+| MOC-R4PCC06U17-N04 | sd530          | 10.2.22.134  |                       |                             |
+| MOC-R4PCC06U19-N01 | sd530          | 10.2.22.141  |                       |                             |
+| MOC-R4PCC06U19-N02 | sd530          | 10.2.22.142  |                       |                             |
+| MOC-R4PCC06U19-N03 | sd530          | 10.2.22.143  |                       |                             |
+| MOC-R4PCC06U19-N04 | sd530          | 10.2.22.144  |                       |                             |
+| MOC-R4PCC06U21-N01 | sd530          | 10.2.22.151  |                       | DOWN FOR NOW                |
+| MOC-R4PCC06U21-N02 | sd530          | 10.2.22.152  |                       | DOWN FOR NOW                |
+| MOC-R4PCC06U21-N03 | sd530          | 10.2.22.153  |                       | DOWN FOR NOW                |
+| MOC-R4PCC06U21-N04 | sd530          | 10.2.22.154  |                       | DOWN FOR NOW                |
+| MOC-R4PCC06U23-N01 | sd530          | 10.2.22.161  |                       |                             |
+| MOC-R4PCC06U23-N02 | sd530          | 10.2.22.162  |                       |                             |
+| MOC-R4PCC06U23-N03 | sd530          | 10.2.22.163  |                       |                             |
+| MOC-R4PCC06U23-N04 | sd530          | 10.2.22.164  |                       |                             |
+| MOC-R4PCC06U25-N01 | sd530          | 10.2.22.171  |                       |                             |
+| MOC-R4PCC06U25-N02 | sd530          | 10.2.22.172  |                       |                             |
+| MOC-R4PCC06U25-N03 | sd530          | 10.2.22.173  |                       |                             |
+| MOC-R4PCC06U25-N04 | sd530          | 10.2.22.174  |                       |                             |
 
 ### A100s
 

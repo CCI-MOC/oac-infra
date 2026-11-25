@@ -234,6 +234,48 @@ all:
                   node_name: MOC-R4PCC02U16
                   bmc_addr: 10.2.19.116
                   resource_class: lenovo-sd665nv3-h100
+    compliant_clusters:
+      children:
+        compliant_prod_infra:
+          vars:
+            cluster: compliant-prod-infra
+            bm_management: bmc
+            bmc_type: idrac
+          children:
+            compliant_prod_infra_controller:
+              vars:
+                boot_image_url: "http://10.2.0.82/boot/discovery-r440.iso"
+              hosts:
+                compliant-prod-infra-control-0:
+                  node_name: MOC-R440-U18
+                  bmc_addr: 10.3.10.118
+                compliant-prod-infra-control-1:
+                  node_name: MOC-R440-U19
+                  bmc_addr: 10.3.10.119
+                compliant-prod-infra-control-2:
+                  node_name: MOC-R440-U20
+                  bmc_addr: 10.3.10.120
+            compliant_prod_infra_compute:
+              vars:
+                bmc_type: lenovo
+                virtual_media_method: redfish
+                boot_image_url: "http://10.2.0.82/boot/discovery-a100.iso"
+              hosts:
+                compliant-dev-infra-compute-0:
+                  node_name: MOC-R4PCC06U01-N02
+                  bmc_addr: 10.2.22.52
+                compliant-dev-infra-compute-1:
+                  node_name: MOC-R4PCC06U03-N01
+                  bmc_addr: 10.2.22.61
+                compliant-dev-infra-compute-2:
+                  node_name: MOC-R4PCC06U05-N01
+                  bmc_addr: 10.2.22.71
+                compliant-dev-infra-compute-3:
+                  node_name: MOC-R4PCC06U07-N01
+                  bmc_addr: 10.2.22.81
+                compliant-dev-infra-compute-4:
+                  node_name: MOC-R4PCC06U09-N01
+                  bmc_addr: 10.2.22.91
     bu_ist_demo_clusters:
       children:
         bu_ist_demo_infra:
